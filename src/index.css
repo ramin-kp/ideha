@@ -37,10 +37,12 @@
     @apply outline-none;
   }
 }
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
 
-/* :root {
-  @apply bg-gray-200 dark:bg-zinc-800;
-} */
 body {
   @apply font-dana bg-gray-50 dark:bg-zinc-800;
 }
