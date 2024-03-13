@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useTheme } from "../context/ThemeProvider";
 import { Link } from "react-router-dom";
 import SwitchTheme from "./SwitchTheme";
 
@@ -16,7 +15,7 @@ function Header() {
     console.log(text);
   };
   return (
-    <header className="flex items-center justify-between my-2 dark:bg-zinc-800">
+    <header className="flex items-center justify-between md:justify-center py-4 mx-3">
       <div className="flex items-center shrink-0 child:mx-2">
         <Link to="/">
           <img
@@ -27,18 +26,18 @@ function Header() {
         </Link>
         <Link
           to="/"
-          className="inline-block px-3 py-1.5 bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 text-white font-DanaDemiBold rounded-lg transition-all duration-75"
+          className="inline-block px-3 py-1.5 bg-blue-700 hover:bg-blue-800 dark:bg-blue-900 dark:hover:bg-blue-700 text-white font-DanaDemiBold  rounded-lg transition-all duration-75"
         >
           خانه
         </Link>
         <Link
           to="/"
-          className="inline-block px-3 py-1.5 hover:bg-blue-700 hover:dark:bg-blue-600 text-zinc-700 dark:text-white hover:text-white font-DanaDemiBold rounded-lg transition-all duration-75"
+          className="inline-block px-3 py-1.5  hover:bg-blue-700 dark:bg-blue-900 hover:dark:bg-blue-600 text-zinc-700 dark:text-white hover:text-white font-DanaDemiBold border border-solid border-blue-700 rounded-lg transition-all duration-75"
         >
           ایده جدید
         </Link>
       </div>
-      <div className="relative flex items-center justify-center mx-5 w-full">
+      <div className="relative flex items-center justify-center mx-5 w-[25%] md:w-[50%] lg:w-[60%] xl:w-[75%] 2xl:w-[80%]">
         <form className="w-full" onSubmit={submitHandler}>
           <input
             type="text"
@@ -50,7 +49,9 @@ function Header() {
           />
         </form>
         <button
-          className={`absolute inset-0 right-[98%] ${!focus ? "hidden" : ""}`}
+          className={`absolute inset-0 opacity-0 sm:opacity-100 sm:right-[82%] md:right-[92%] xl:right-[97%] ${
+            !focus ? "hidden" : ""
+          }`}
           onClick={focusHandler}
         >
           <svg className="w-5 h-5 m-1 shrink-0 rounded-full dark:text-white hover:bg-gray-300 ">
@@ -58,11 +59,19 @@ function Header() {
           </svg>
         </button>
       </div>
-      <div className="flex grow items-center justify-center">
+      <div className="flex items-center justify-center gap-x-5">
         <div>
           <SwitchTheme />
         </div>
-        <div>profile</div>
+        <div>
+          <Link to="/">
+            <img
+              src="./images/profile.png"
+              alt="profile-log"
+              className="shrink-0 rounded-full w-10 h-10 object-cover"
+            />
+          </Link>
+        </div>
       </div>
     </header>
   );

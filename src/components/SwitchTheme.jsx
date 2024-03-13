@@ -26,11 +26,28 @@ const ThemeSwitch = (props) => {
             class: [
               "w-8 h-8",
               "flex items-center justify-center",
-              "rounded-lg bg-default-100 hover:bg-default-200",
+              "rounded-lg ",
             ],
           })}
         >
-          {isSelected ? (
+          {theme === "dark" && (
+            <svg
+              className="flex items-center justify-center w-8 h-8 "
+              onClick={() => toggleTheme()}
+            >
+              <use href="#moon"></use>
+            </svg>
+          )}
+          {theme === "light" && (
+            <svg
+              className="flex items-center justify-center w-8 h-8 text-yellow-600 "
+              onClick={() => toggleTheme()}
+            >
+              <use href="#sun"></use>
+            </svg>
+          )}
+
+          {/* {isSelected ? (
             <svg
               className="flex items-center justify-center w-5 h-5 "
               onClick={() => toggleTheme()}
@@ -44,7 +61,7 @@ const ThemeSwitch = (props) => {
             >
               <use href="#sun"></use>
             </svg>
-          )}
+          )} */}
         </div>
       </Component>
       {/* <p className="text-default-500 select-none">

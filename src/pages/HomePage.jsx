@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <>
       <Header />
-      <div className="font-DanaExtraBold">صفحه لاگین</div>
+      <main className="my-5">صفحه لاگین</main>
       <Footer />
     </>
   );
