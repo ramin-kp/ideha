@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-function LoginPage() {
+function RegisterPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const submitHandler = (data) => {
-    console.log(data);
+  const submitHandler = (values) => {
+    console.log(values);
   };
   return (
     <main className="flex-center gap-y-5 h-screen ">
@@ -51,6 +51,31 @@ function LoginPage() {
             )}
           </div>
           <div className="w-full">
+            <label>ایمیل </label>
+            <input
+              type="email"
+              placeholder="ایمیل..."
+              className="bg-zinc-600 w-full h-10 p-1 rounded-md"
+              {...register("email", {
+                required: "لطفا ایمیل خود را وارد کنید",
+                minLength: {
+                  value: 10,
+                  message: "تعدادا کاراکتر باید بیشتر از 10 تا باشد",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "تعدادا کاراکتر باید بیشتر از 30 تا باشد",
+                },
+                pattern: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g,
+              })}
+            />
+            {errors.email && (
+              <span className="inline-block text-red-600 text-base xs:text-lg mt-2">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+          <div className="w-full">
             <label>پسورد </label>
             <input
               type="password"
@@ -66,6 +91,11 @@ function LoginPage() {
                   value: 20,
                   message: "تعدادا کاراکتر باید بیشتر از 20 تا باشد",
                 },
+                pattern: {
+                  value:
+                    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/g,
+                  message: "از حروف بزرگ کوچک و اعداد استفاده کنید",
+                },
               })}
             />
             {errors.password && (
@@ -79,13 +109,13 @@ function LoginPage() {
               type="submit"
               className="p-2 w-full bg-blue-700 hover:bg-blue-800 transition-all duration-75 rounded-lg "
             >
-              ورود
+              ثبت نام
             </button>
             <Link
-              to="/register"
+              to="/login"
               className="p-2 w-full border-2 border-solid border-blue-700 text-white text-center transition-all duration-75 rounded-lg "
             >
-              ثبت نام
+              ورود
             </Link>
           </div>
         </form>
@@ -94,4 +124,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
