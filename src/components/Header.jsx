@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { useTheme } from "../context/ThemeProvider";
 import { Link } from "react-router-dom";
-import { Button, Input } from "@nextui-org/react";
+import SwitchTheme from "./SwitchTheme";
 
 function Header() {
-  const { theme, toggleTheme } = useTheme();
   const [text, setText] = useState("");
+  const [focus, setFocus] = useState(false);
+
+  const focusHandler = () => {
+    setFocus(false);
+    setText(() => "");
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(text);
+  };
   return (
-    <header className="flex items-center justify-between my-2">
+    <header className="flex items-center justify-between my-2 dark:bg-zinc-800">
       <div className="flex items-center shrink-0 child:mx-2">
         <Link to="/">
           <img
@@ -29,25 +38,32 @@ function Header() {
           ایده جدید
         </Link>
       </div>
-      <div className="flex items-center justify-center w-full">
-        <Input
-          isClearable
-          type="text"
-          variant="faded"
-          label="جستوجو"
-          className="w-full font-DanaDemiBold"
-          placeholder="Enter your email"
-          defaultValue=""
-          onChange={(e) => setText(e.target.value)}
-          onClear={(e) => console.log(e.target.value)}
-        />
-        <Button className="w-0.5">
-          <svg className="w-4 h-4">
-            <use href="#search"></use>
+      <div className="relative flex items-center justify-center mx-5 w-full">
+        <form className="w-full" onSubmit={submitHandler}>
+          <input
+            type="text"
+            className="w-full p-2 bg-gray-200 dark:bg-blue-900 font-DanaMedium rounded-lg"
+            placeholder="جستوجو"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onFocus={() => setFocus(true)}
+          />
+        </form>
+        <button
+          className={`absolute inset-0 right-[98%] ${!focus ? "hidden" : ""}`}
+          onClick={focusHandler}
+        >
+          <svg className="w-5 h-5 m-1 shrink-0 rounded-full dark:text-white hover:bg-gray-300 ">
+            <use href="#x-mark"></use>
           </svg>
-        </Button>
+        </button>
       </div>
-      <div>3</div>
+      <div className="flex grow items-center justify-center">
+        <div>
+          <SwitchTheme />
+        </div>
+        <div>profile</div>
+      </div>
     </header>
   );
 }
